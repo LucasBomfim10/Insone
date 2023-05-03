@@ -1,0 +1,11 @@
+html{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 100px;
+    background-color: antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    text-align: center;
+}
