@@ -74,13 +74,13 @@
         function preload() {
 
             // Carregando a spritesheet do player
-            this.load.spritesheet('player', 'assets/manu.png', {
+            this.load.spritesheet('player', 'assets/Manu (1).png', {
                 frameWidth: 157,
                 frameHeight: 157
             });
             // Carregando as imagens
-            this.load.image('map', 'assets/map1long.png');
-            this.load.image('ground', 'assets/groundmap.png');
+            this.load.image('map', 'assets/fundodefault.png');
+            this.load.image('ground', 'assets/grounddefault.png');
 
             this.load.spritesheet('enemy', 'assets/idle (7).png', {
                 frameWidth: 157,
@@ -90,17 +90,22 @@
 
         function create() {
 
-
-            // Adicionando o chão
-            this.ground = this.physics.add.staticGroup();
-            for (let i = 1; i <= 5; i++) {
-                this.ground.create(i * 400, 600, 'ground').setScale(1).refreshBody(1);
-            }
+            
+            
+            
+            
+           
             // Adicionando o céu  
-            this.add.image(1500, 300, 'map')
+            this.add.image(3000, 300, 'map')
+
+             // Adicionando o chão
+             this.ground = this.physics.add.staticGroup();
+            
+            this.ground.create(3000, 600, 'ground').setScale(1).refreshBody(1);
+            
 
             // Adicionando o player
-            this.player = this.physics.add.sprite(100, this.ground.getChildren()[0].y - 1168, 'player', 'player');
+            this.player = this.physics.add.sprite(100, this.ground.getChildren()[0].y - 500, 'player', 'player');
 
             // Adicionando o inimigo
             this.enemy = this.physics.add.sprite(700, 304, 'enemy');
@@ -116,7 +121,7 @@
 
             // Configurando câmera
 
-            this.cameras.main.setBounds(0, 0, 2400, 600);
+            this.cameras.main.setBounds(0, 0, 6000, 600);
             this.cameras.main.startFollow(this.player);
             this.cameras.main.setFollowOffset(0, 0);
             this.cameras.main.setDeadzone(200, 0);
@@ -125,7 +130,7 @@
 
 
             // Adicionando bordas invisíveis ao mundo
-            this.physics.world.setBounds(0, 0, 2400, 600);
+            this.physics.world.setBounds(0, 0, 6000, 600);
 
             // Adicionando a colisão entre jogador e inimigo
             this.playerCollider = this.physics.add.collider(this.player, this.enemy);
@@ -188,11 +193,11 @@
             // Configurando movimento do player
             var cursors = this.input.keyboard.createCursorKeys();
             if (cursors.left.isDown) {
-                this.player.setVelocityX(-160);
+                this.player.setVelocityX(-360);
                 this.player.anims.play('left', true);
             }
             else if (cursors.right.isDown) {
-                this.player.setVelocityX(160);
+                this.player.setVelocityX(360);
                 this.player.anims.play('right', true);
             }
             else {
@@ -201,7 +206,7 @@
             }
 
             if (cursors.up.isDown && this.player.body.touching.down) {
-                this.player.setVelocityY(-330);
+                this.player.setVelocityY(-180);
             }
 
 
