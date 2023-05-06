@@ -28,7 +28,7 @@ function create() {
     // Adicionando o chão
     this.ground = this.physics.add.staticGroup();
 
-    this.ground.create(3000, 600, 'ground').setScale(1).refreshBody(1);
+    this.ground.create(3000, 550, 'ground').setScale(1).refreshBody(1);
 
 
     // Adicionando o player
