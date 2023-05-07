@@ -232,7 +232,8 @@ function hitEnemy(player, enemy) {
             // game over
             this.physics.pause();
             player.setTint(0xff0000);
-            gameOver = true;
+            game.scene.start('gameover');
+            
         } else {
             // reseta a posição do jogador
             player.setX(100);

@@ -16,6 +16,7 @@
 <body>
     <h1>Insone</h1>
     <script src="menu.js" type="text/javascript"></script>
+    <script src="gameover.js" type="text/javascript"></script>
     <script src="intro.js" type="text/javascript"></script>
     <script src="main.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -42,9 +43,10 @@
         // Criando o jogo
         var game = new Phaser.Game(config);
 
-        // Adicionando a cena 'intro' à primeira instância do jogo
+        // Adicionando as cenas à primeira instância do jogo
         game.scene.add('intro', introConfig);
         game.scene.add('menu', menuConfig);
+        game.scene.add('gameover', gameover);
 
         // Carregando a cena 'intro' como cena inicial
         game.scene.start('menu');
