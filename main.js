@@ -11,7 +11,7 @@ function preload() {
         frameHeight: 157
     });
     // Carregando as imagens
-    this.load.image('map', 'assets/fundodefault.png');
+    this.load.image('map', 'assets/inicio-jogo-atualizado.png');
     this.load.image('ground', 'assets/grounddefault.png');
 
     this.load.spritesheet('enemy', 'assets/idle (7).png', {
@@ -22,13 +22,13 @@ function preload() {
 
 function create() {
 
-    // Adicionando o céu  
-    this.add.image(3000, 300, 'map')
-
     // Adicionando o chão
     this.ground = this.physics.add.staticGroup();
 
-    this.ground.create(3000, 550, 'ground').setScale(1).refreshBody(1);
+    this.ground.create(1768, 570, 'ground').setScale(1).refreshBody(1);
+
+    // Adicionando o céu  
+    this.add.image(1768, 300, 'map');
 
 
     // Adicionando o player
@@ -48,7 +48,7 @@ function create() {
 
     // Configurando câmera
 
-    this.cameras.main.setBounds(0, 0, 6000, 600);
+    this.cameras.main.setBounds(0, 0, 3536, 600);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setFollowOffset(0, 0);
     this.cameras.main.setDeadzone(200, 0);
@@ -57,7 +57,7 @@ function create() {
 
 
     // Adicionando bordas invisíveis ao mundo
-    this.physics.world.setBounds(0, 0, 6000, 600);
+    this.physics.world.setBounds(0, 0, 3536, 600);
 
     // Adicionando a colisão entre jogador e inimigo
     this.playerCollider = this.physics.add.collider(this.player, this.enemy);
@@ -133,7 +133,7 @@ function update() {
     }
 
     if (cursors.up.isDown && this.player.body.touching.down) {
-        this.player.setVelocityY(-180);
+        this.player.setVelocityY(-400);
     }
 
 
