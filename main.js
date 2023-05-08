@@ -2,6 +2,7 @@
 
 var playerLives = 3; // quantidade de vidas inicial do jogador
 var heartGroup; // grupo de sprites de coração
+var music
 
 function preload() {
 
@@ -26,12 +27,12 @@ function preload() {
     this.load.audio('music', 'assets/Pixel Music Pack/mp3/Pixel 3.mp3');
 
 
-    }
+}
 
 function create() {
-    
+
     // Adicionando a música ao jogo
-    var music = this.sound.add('music');
+    music = this.sound.add('music');
 
 
     // Definindo o volume da música
@@ -72,8 +73,8 @@ function create() {
 
 
 
-    
-    
+
+
     // Atualizando a quantidade de vidas
     updatePlayerLives();
 
@@ -84,7 +85,7 @@ function create() {
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setFollowOffset(0, 0);
     this.cameras.main.setDeadzone(200, 0);
-    
+
 
 
     // Adicionando bordas invisíveis ao mundo
@@ -148,7 +149,7 @@ function create() {
     });
 
 
-    
+
     // Configurando o scroll factor para cada coração individualmente
     heartGroup.children.iterate(function (heart) {
         heart.setScrollFactor(0);
@@ -159,7 +160,7 @@ function create() {
 
 function update() {
 
-    
+
     // Configurando movimento do player
     var cursors = this.input.keyboard.createCursorKeys();
     if (cursors.left.isDown) {
@@ -197,8 +198,14 @@ function update() {
         this.enemy.anims.play('turn1', true);
     }
 
-    
-   
+
+    /* Boss
+    if (this.player.x >= 3100) { // Verifica se o jogador chegou ao final da fase
+        this.scene.stop('main')
+        game.scene.start('boss1'); // Inicia a cena do chefe
+        
+    }
+    */
 
 
 }
@@ -206,13 +213,13 @@ function update() {
 function updatePlayerLives() {
     // Atualiza a quantidade de corações de acordo com as vidas do jogador
     heartGroup.children.each(function (heart, index) {
-      if (index < playerLives) {
-        heart.visible = true;
-      } else {
-        heart.visible = false;
-      }
+        if (index < playerLives) {
+            heart.visible = true;
+        } else {
+            heart.visible = false;
+        }
     });
-  }
+}
 
 var playerCanHitEnemy = true; // adiciona um sinalizador de colisão no jogador
 
@@ -233,7 +240,7 @@ function hitEnemy(player, enemy) {
             this.physics.pause();
             player.setTint(0xff0000);
             game.scene.start('gameover');
-            
+
         } else {
             // reseta a posição do jogador
             player.setX(100);
