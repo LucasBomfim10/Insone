@@ -8,7 +8,7 @@ var cena1= {
       });
       this.load.image('map', 'assets/inicio-jogo-atualizado.png');
       this.load.image('ground', 'assets/grounddefault.png');
-      this.load.spritesheet('enemy', 'assets/idle (7).png', {
+      this.load.spritesheet('enemy', 'assets/Idle (7).png', {
         frameWidth: 157,
         frameHeight: 157
       });
