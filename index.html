@@ -16,9 +16,18 @@
 <body>
     <h1>Insone</h1>
     <script src="menu.js" type="text/javascript"></script>
+    <script src="gameover.js" type="text/javascript"></script>
     <script src="intro.js" type="text/javascript"></script>
-    <script src="main.js" type="text/javascript"></script>
+    <script src="cena1" type="text/javascript"></script>
+    <script src="boss1.js" type="text/javascript"></script>
+
     <script type="text/javascript">
+        var playerLives = 4;
+        var heartGroup;
+        var music;
+        var playerCanHitEnemy = true;
+        var playerCollider;
+
         var config = {
 
             type: Phaser.AUTO,
@@ -38,16 +47,28 @@
             }
         };
 
+        function preload() {}
+        function create() {
+        }
+        function update() {}
+
 
         // Criando o jogo
         var game = new Phaser.Game(config);
 
-        // Adicionando a cena 'intro' à primeira instância do jogo
+        // Adicionando as cenas à primeira instância do jogo
         game.scene.add('intro', introConfig);
         game.scene.add('menu', menuConfig);
+        game.scene.add('cena1', cena1);
+        game.scene.add('gameover', gameover);
+        game.scene.add('boss1', boss1);
 
         // Carregando a cena 'intro' como cena inicial
         game.scene.start('menu');
+
+        
+        
+  
 
     </script>
 

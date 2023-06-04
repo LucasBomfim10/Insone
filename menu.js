@@ -15,7 +15,7 @@ var menuConfig = {
         button.setInteractive();
         button.on('pointerdown', function () {
             // Comece o jogo
-            this.scene.start('main');
+            this.scene.start('cena1');
         }, this);
     }
 };

@@ -1,7 +1,8 @@
 
 
 var playerLives = 3; // quantidade de vidas inicial do jogador
-var livesText; // variável global para o texto de vidas
+var heartGroup; // grupo de sprites de coração
+var music
 
 function preload() {
 
@@ -18,9 +19,35 @@ function preload() {
         frameWidth: 157,
         frameHeight: 157
     });
+    // Carregando a imagem do coração
+    this.load.image('heart', 'assets/heart.png');
+
+
+    // Carregando o arquivo de música
+    this.load.audio('music', 'assets/Pixel Music Pack/mp3/Pixel 3.mp3');
+
+
 }
 
 function create() {
+
+    // Adicionando a música ao jogo
+    music = this.sound.add('music');
+
+
+    // Definindo o volume da música
+    music.setVolume(0.3); // Define o volume para 30%
+
+    // Configurando a música para tocar em loop
+    music.setLoop(true);
+
+    // Tocando a música
+    music.play();
+
+
+
+    // Criando o grupo de sprites de coração
+    heartGroup = this.add.group();
 
     // Adicionando o chão
     this.ground = this.physics.add.staticGroup();
@@ -40,10 +67,16 @@ function create() {
     // Configurando colisões
     this.physics.add.collider(this.player, this.ground);
     this.physics.add.collider(this.enemy, this.ground);
-    //this.physics.add.collider(this.player, this.enemy, hitEnemy, null, this);
+    this.physics.add.collider(this.player, this.enemy, hitEnemy, null, this);
     this.player.setCollideWorldBounds(true);
     this.enemy.setCollideWorldBounds(true);
 
+
+
+
+
+    // Atualizando a quantidade de vidas
+    updatePlayerLives();
 
 
     // Configurando câmera
@@ -55,17 +88,12 @@ function create() {
 
 
 
-
     // Adicionando bordas invisíveis ao mundo
     this.physics.world.setBounds(0, 0, 3536, 600);
 
     // Adicionando a colisão entre jogador e inimigo
     this.playerCollider = this.physics.add.collider(this.player, this.enemy);
 
-    //Texto de vida
-    livesText = this.add.text(16, 16, 'Lives: ' + playerLives, { fontSize: '32px', fill: '#000' });
-    livesText.setScrollFactor(0);
-    livesText.setOrigin(0, 0);
 
     this.anims.create({
         key: 'left',
@@ -112,10 +140,26 @@ function create() {
         repeat: -1
     });
 
+    // Configurando a posição e a escala do grupo de corações
+    heartGroup.createMultiple({
+        key: 'heart',
+        repeat: playerLives - 1,
+        setXY: { x: 22, y: 22, stepX: 32 },
+        setScale: { x: 2, y: 2 }
+    });
+
+
+
+    // Configurando o scroll factor para cada coração individualmente
+    heartGroup.children.iterate(function (heart) {
+        heart.setScrollFactor(0);
+    });
+
 }
 
 
 function update() {
+
 
     // Configurando movimento do player
     var cursors = this.input.keyboard.createCursorKeys();
@@ -154,18 +198,29 @@ function update() {
         this.enemy.anims.play('turn1', true);
     }
 
-    // Atualizando posição da câmera para seguir o jogador
-    this.cameras.main.scrollX = this.player.x - this.cameras.main.width / 2;
-    livesText.setScrollFactor(0);
 
+    /* Boss
+    if (this.player.x >= 3100) { // Verifica se o jogador chegou ao final da fase
+        this.scene.stop('main')
+        game.scene.start('boss1'); // Inicia a cena do chefe
+        
+    }
+    */
 
 
 }
 
 function updatePlayerLives() {
-    // atualiza a quantidade de vidas na tela
-    livesText.setText('Lives: ' + playerLives);
+    // Atualiza a quantidade de corações de acordo com as vidas do jogador
+    heartGroup.children.each(function (heart, index) {
+        if (index < playerLives) {
+            heart.visible = true;
+        } else {
+            heart.visible = false;
+        }
+    });
 }
+
 var playerCanHitEnemy = true; // adiciona um sinalizador de colisão no jogador
 
 function hitEnemy(player, enemy) {
@@ -184,11 +239,12 @@ function hitEnemy(player, enemy) {
             // game over
             this.physics.pause();
             player.setTint(0xff0000);
-            gameOver = true;
+            game.scene.start('gameover');
+
         } else {
             // reseta a posição do jogador
             player.setX(100);
-            player.setY(450);
+            player.setY(250);
 
             // Remove a colisão entre o jogador e o inimigo
             this.physics.world.removeCollider(this.playerCollider);

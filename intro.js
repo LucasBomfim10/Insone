@@ -3,8 +3,8 @@ var introConfig = {
     preload: function () {
         // Carregando as imagens de introdução
         this.load.image('intro1', 'assets/Intro1.png');
-        this.load.image('intro2', 'assets/intro2.png');
-        this.load.image('intro3', 'assets/intro3.png');
+        this.load.image('intro2', 'assets/Intro2.png');
+        this.load.image('intro3', 'assets/Intro3.png');
     },
     create: function () {
         // Adicionando as imagens de introdução
