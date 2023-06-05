@@ -22,6 +22,7 @@
     <script src="boss1.js" type="text/javascript"></script>
 
     <script type="text/javascript">
+        // Variáveis globais
         var playerLives = 4;
         var heartGroup;
         var music;
@@ -29,10 +30,10 @@
         var playerCollider;
 
         var config = {
-
+            // Configurações do jogo
             type: Phaser.AUTO,
-            width: 800,
-            height: 600,
+            width: 1000,
+            height: 832,
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -47,10 +48,21 @@
             }
         };
 
-        function preload() {}
-        function create() {
+        function preload() {
+            //Preload global
+            this.load.spritesheet('player', 'assets/Manu (1).png', {
+                frameWidth: 157,
+                frameHeight: 157
+            });
+            this.load.image('heart', 'assets/heart.png');
         }
-        function update() {}
+        function create() {
+            //Create Global
+            
+        }
+        function update() {
+            //Update Global
+        }
 
 
         // Criando o jogo

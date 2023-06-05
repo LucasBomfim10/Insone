@@ -6,20 +6,8 @@ var music
 
 function preload() {
 
-    // Carregando a spritesheet do player
-    this.load.spritesheet('player', 'assets/ella1 (1).png', {
-        frameWidth: 200,
-        frameHeight: 200
-    });
-    // Carregando as imagens
-    //this.load.image('map', 'assets/inicio-jogo-atualizado.png');
-    this.load.image('map', 'assets/cenario/cenario1.png');
-    this.load.image('ground', 'assets/grounddefault.png');
-
-    this.load.spritesheet('enemy', 'assets/idle (7).png', {
-        frameWidth: 157,
-        frameHeight: 157
-    });
+    
+    
     // Carregando a imagem do coração
     this.load.image('heart', 'assets/heart.png');
 
@@ -50,14 +38,7 @@ function create() {
     // Criando o grupo de sprites de coração
     heartGroup = this.add.group();
 
-    // Adicionando o chão
-    this.ground = this.physics.add.staticGroup();
-
-    this.ground.create(1768, 570, 'ground').setScale(1).refreshBody(1);
-
-    // Adicionando o céu  
-    //this.add.image(1768, 300, 'map');
-    this.add.image(2304, 416, 'map');
+    
 
 
     // Adicionando o player
@@ -81,13 +62,7 @@ function create() {
     updatePlayerLives();
 
 
-    // Configurando câmera
-
-    //this.cameras.main.setBounds(0, 0, 3536, 600);
-    this.cameras.main.setBounds(0, 0, 4608, 832);
-    this.cameras.main.startFollow(this.player);
-    this.cameras.main.setFollowOffset(0, 0);
-    this.cameras.main.setDeadzone(200, 0);
+    
 
 
 
