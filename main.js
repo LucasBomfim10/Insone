@@ -12,7 +12,8 @@ function preload() {
         frameHeight: 200
     });
     // Carregando as imagens
-    this.load.image('map', 'assets/inicio-jogo-atualizado.png');
+    //this.load.image('map', 'assets/inicio-jogo-atualizado.png');
+    this.load.image('map', 'assets/cenario/cenario1.png');
     this.load.image('ground', 'assets/grounddefault.png');
 
     this.load.spritesheet('enemy', 'assets/idle (7).png', {
@@ -55,7 +56,8 @@ function create() {
     this.ground.create(1768, 570, 'ground').setScale(1).refreshBody(1);
 
     // Adicionando o céu  
-    this.add.image(1768, 300, 'map');
+    //this.add.image(1768, 300, 'map');
+    this.add.image(2304, 416, 'map');
 
 
     // Adicionando o player
@@ -81,7 +83,8 @@ function create() {
 
     // Configurando câmera
 
-    this.cameras.main.setBounds(0, 0, 3536, 600);
+    //this.cameras.main.setBounds(0, 0, 3536, 600);
+    this.cameras.main.setBounds(0, 0, 4608, 832);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setFollowOffset(0, 0);
     this.cameras.main.setDeadzone(200, 0);
@@ -89,8 +92,8 @@ function create() {
 
 
     // Adicionando bordas invisíveis ao mundo
-    this.physics.world.setBounds(0, 0, 3536, 600);
-
+    //this.physics.world.setBounds(0, 0, 3536, 600);
+    this.physics.world.setBounds(0, 0, 4608, 832);
     // Adicionando a colisão entre jogador e inimigo
     this.playerCollider = this.physics.add.collider(this.player, this.enemy);
 
