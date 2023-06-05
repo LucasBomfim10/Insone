@@ -2,7 +2,7 @@ html{
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin: 100px;
+    margin: 0px;
     background-color: antiquewhite;
     font-family: Arial, Helvetica, sans-serif;
 }
