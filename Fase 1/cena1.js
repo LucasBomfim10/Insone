@@ -4,8 +4,8 @@ var cena1 = {
   preload: function () {
     // Carregando assets específicos para a cena
     this.load.image('map', 'assets/cenario/cenario1.png');
-    this.load.image('ground', 'assets/grounddefault.png');
-    this.load.spritesheet('enemy', 'assets/Idle (7).png', {
+    this.load.image('ground', 'assets/cenario/grounddefault.png');
+    this.load.spritesheet('enemy', 'assets/Personagem/Idle (7).png', {
       frameWidth: 157,
       frameHeight: 157
     });

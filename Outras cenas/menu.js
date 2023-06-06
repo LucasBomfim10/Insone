@@ -1,8 +1,8 @@
 var menuConfig = {
     key: 'menu',
     preload: function () {
-        this.load.image('background', 'assets/cenario-2.png');
-        this.load.image('button', 'assets/button.png');
+        this.load.image('background', 'assets/Menu/cenario-2.png');
+        this.load.image('button', 'assets/Menu/button.png');
     },
     create: function () {
         // Adicione um fundo ao menu
