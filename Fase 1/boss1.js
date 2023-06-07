@@ -1,7 +1,7 @@
 var boss1 = {
     key: 'boss1',
     preload: function () {
-        this.load.image('boss1fundo', 'assets/boss1-fundo.png');
+        this.load.image('boss1fundo', 'assets/cenario/boss1-fundo.png');
         this.load.audio('music1', 'assets/Pixel Music Pack/mp3/Pixel 5.mp3');
         
 
