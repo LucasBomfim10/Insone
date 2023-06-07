@@ -39,14 +39,14 @@ var cena1 = {
           this.physics.pause();
           player.setTint(0xff0000);
           this.scene.start('gameover');
-        /*} else {
+        } else {
           player.setX(100);
           player.setY(250);
           this.physics.world.removeCollider(playerCollider);
           this.time.delayedCall(1000, () => {
             playerCanHitEnemy = true;
             playerCollider = this.physics.add.collider(player, enemy, hitEnemy, null, this);
-          });*/
+          });
         }
       }
     }
@@ -102,8 +102,8 @@ var cena1 = {
     // Criação das animações do jogador
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { start: 7, end: 12 }),
-      frameRate: 12,
+      frames: this.anims.generateFrameNumbers('player', { start: 8, end: 12 }),
+      frameRate: 13,
       repeat: -1
     });
 
@@ -116,14 +116,14 @@ var cena1 = {
     this.anims.create({
       key: 'right',
       frames: this.anims.generateFrameNumbers('player', { start: 1, end: 6 }),
-      frameRate: 12,
+      frameRate: 13,
       repeat: -1
     });
 
     // Criação das animações do inimigo
     this.anims.create({
       key: 'left1',
-      frames: this.anims.generateFrameNumbers('enemy', { start: 4, end: 7 }),
+      frames: this.anims.generateFrameNumbers('enemy', { start: 4, end: 6 }),
       //frames: [{ key: 'enemy', frame: 0 }],
       frameRate: 10,
       repeat: -1
