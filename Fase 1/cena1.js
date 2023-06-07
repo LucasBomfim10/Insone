@@ -71,6 +71,14 @@ var cena1 = {
     this.player = this.physics.add.sprite(100, this.ground.getChildren()[0].y - 500, 'player', 'player');
     this.enemy = this.physics.add.sprite(700, 304, 'enemy');
 
+    // Configurando offset para o jogador
+    this.player.setSize(100, 200); // Define o tamanho da área de colisão
+    this.player.setOffset(70, 10); // Define o deslocamento (offset) da área de colisão em relação ao sprite
+
+    // Configurando offset para o inimigo
+    this.enemy.setSize(100, 200);
+    this.enemy.setOffset(70, 10);
+
     // Configurando colisões
     this.physics.add.collider(this.player, this.ground);
     this.physics.add.collider(this.enemy, this.ground);
@@ -115,7 +123,7 @@ var cena1 = {
     // Criação das animações do inimigo
     this.anims.create({
       key: 'left1',
-      frames: this.anims.generateFrameNumbers('enemy', { start: 7, end: 4 }),
+      frames: this.anims.generateFrameNumbers('enemy', { start: 4, end: 7 }),
       //frames: [{ key: 'enemy', frame: 0 }],
       frameRate: 10,
       repeat: -1
