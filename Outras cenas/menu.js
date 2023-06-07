@@ -6,7 +6,7 @@ var menuConfig = {
     },
     create: function () {
         // Adicione um fundo ao menu
-        this.add.image(400, 300, 'background');
+        //this.add.image(400, 300, 'background');
 
         // Adicione um botão ao menu
         var button = this.add.image(390, 200, 'button');

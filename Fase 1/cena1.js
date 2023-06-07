@@ -39,14 +39,14 @@ var cena1 = {
           this.physics.pause();
           player.setTint(0xff0000);
           this.scene.start('gameover');
-        } else {
+        /*} else {
           player.setX(100);
           player.setY(250);
           this.physics.world.removeCollider(playerCollider);
           this.time.delayedCall(1000, () => {
             playerCanHitEnemy = true;
             playerCollider = this.physics.add.collider(player, enemy, hitEnemy, null, this);
-          });
+          });*/
         }
       }
     }
@@ -186,7 +186,7 @@ var cena1 = {
     }
 
     // Verificação se o jogador chegou ao final da fase
-    if (this.player.x >= 3100) {
+    if (this.player.x >= 4500) {
       music.stop();
       this.scene.stop('cena1');
       game.scene.start('boss1'); // Inicia a cena do chefe
