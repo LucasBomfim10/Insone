@@ -5,9 +5,9 @@ var cena1 = {
     // Carregando assets específicos para a cena
     this.load.image('map', 'assets/cenario/cenario1.png');
     this.load.image('ground', 'assets/cenario/grounddefault.png');
-    this.load.spritesheet('enemy', 'assets/Personagem/Idle (7).png', {
-      frameWidth: 157,
-      frameHeight: 157
+    this.load.spritesheet('enemy', 'assets/Personagem/inimigocerto.png', {
+      frameWidth: 240,
+      frameHeight: 223
     });
 
     this.load.audio('music', 'assets/Pixel Music Pack/mp3/Pixel 3.mp3');
@@ -115,20 +115,22 @@ var cena1 = {
     // Criação das animações do inimigo
     this.anims.create({
       key: 'left1',
-      frames: [{ key: 'enemy', frame: 0 }],
+      frames: this.anims.generateFrameNumbers('enemy', { start: 7, end: 4 }),
+      //frames: [{ key: 'enemy', frame: 0 }],
       frameRate: 10,
       repeat: -1
     });
 
     this.anims.create({
       key: 'turn1',
-      frames: [{ key: 'enemy', frame: 1 }],
+      frames: [{ key: 'enemy', frame: 4 }],
       frameRate: 20
     });
 
     this.anims.create({
       key: 'right1',
-      frames: [{ key: 'enemy', frame: 2 }],
+      frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 3 }),
+      //frames: [{ key: 'enemy', frame: 2 }],
       frameRate: 10,
       repeat: -1
     });
