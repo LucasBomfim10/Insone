@@ -62,10 +62,10 @@ var cena1 = {
 
     // Criação do chão
     this.ground = this.physics.add.staticGroup();
-    this.ground.create(2304, 932, 'ground').setScale(1).refreshBody(1);
+    this.ground.create(2294, 630, 'ground').setScale(1).refreshBody(1);
 
     // Adicionando uma imagem de mapa
-    this.add.image(2304, 416, 'map');
+    this.add.image(2294, 300, 'map');
 
     // Criando jogador e inimigo
     this.player = this.physics.add.sprite(100, this.ground.getChildren()[0].y - 500, 'player', 'player');
@@ -94,21 +94,21 @@ var cena1 = {
     // Criação das animações do jogador
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
-      frameRate: 10,
+      frames: this.anims.generateFrameNumbers('player', { start: 7, end: 12 }),
+      frameRate: 12,
       repeat: -1
     });
 
     this.anims.create({
       key: 'turn',
-      frames: [{ key: 'player', frame: 4 }],
+      frames: [{ key: 'player', frame: 0 }],
       frameRate: 20
     });
 
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-      frameRate: 10,
+      frames: this.anims.generateFrameNumbers('player', { start: 1, end: 6 }),
+      frameRate: 12,
       repeat: -1
     });
 
@@ -134,13 +134,13 @@ var cena1 = {
     });
 
     // Configuração da câmera
-    this.cameras.main.setBounds(0, 0, 4608, 832);
+    this.cameras.main.setBounds(0, 0, 4588, 600);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setFollowOffset(0, 0);
     this.cameras.main.setDeadzone(200, 0);
 
     // Configuração dos limites do mundo físico
-    this.physics.world.setBounds(0, 0, 3536, 600);
+    this.physics.world.setBounds(0, 0, 4588, 600);
 
     // Atribuição da função de atualização das vidas do jogador à cena
     this.updatePlayerLives = updatePlayerLives;
