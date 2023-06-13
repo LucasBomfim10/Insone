@@ -23,7 +23,8 @@
 
     <script type="text/javascript">
         // Variáveis globais
-        var playerLives = 4;
+        var playerLives = 6;
+        var enemyLives = 2;
         var heartGroup;
         var music;
         var playerCanHitEnemy = true;
@@ -50,7 +51,7 @@
 
         function preload() {
             //Preload global
-            this.load.spritesheet('player', 'assets/Personagem/ella1 (1).png', {
+            this.load.spritesheet('player', 'assets/Personagem/ella-com-ataque.png', {
                 frameWidth: 200,
                 frameHeight: 200
             });

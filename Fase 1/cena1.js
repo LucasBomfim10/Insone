@@ -120,6 +120,13 @@ var cena1 = {
       repeat: -1
     });
 
+    this.anims.create({
+      key: 'space',
+      frames: this.anims.generateFrameNumbers('player', { start: 15, end: 16 }),
+      frameRate: 5,
+      repeat: 2
+    });
+
     // Criação das animações do inimigo
     this.anims.create({
       key: 'left1',
@@ -169,7 +176,12 @@ var cena1 = {
     } else if (cursors.right.isDown) {
       this.player.setVelocityX(360);
       this.player.anims.play('right', true);
-    } else {
+    } 
+      else if(cursors.space.isDown){
+      this.player.setVelocityX(0);
+      this.player.anims.play('space', true);
+    }
+      else {
       this.player.setVelocityX(0);
       this.player.anims.play('turn');
     }
