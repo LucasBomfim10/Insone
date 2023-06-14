@@ -40,8 +40,8 @@ var cena1 = {
           player.setTint(0xff0000);
           this.scene.start('gameover');
         } else {
-          player.setX(100);
-          player.setY(250);
+          player.setX((this.player.x) - 50);
+          //player.setY(250);
           this.physics.world.removeCollider(playerCollider);
           this.time.delayedCall(1000, () => {
             playerCanHitEnemy = true;
@@ -72,8 +72,8 @@ var cena1 = {
     this.enemy = this.physics.add.sprite(700, 304, 'enemy');
 
     // Configurando offset para o jogador
-    this.player.setSize(100, 200); // Define o tamanho da área de colisão
-    this.player.setOffset(70, 10); // Define o deslocamento (offset) da área de colisão em relação ao sprite
+    this.player.setSize(80, 200); // Define o tamanho da área de colisão
+    this.player.setOffset(50, 10); // Define o deslocamento (offset) da área de colisão em relação ao sprite
 
     // Configurando offset para o inimigo
     this.enemy.setSize(100, 200);
@@ -121,9 +121,16 @@ var cena1 = {
     });
 
     this.anims.create({
-      key: 'space',
+      key: 'space-right',
       frames: this.anims.generateFrameNumbers('player', { start: 15, end: 16 }),
-      frameRate: 5,
+      frameRate: 2,
+      repeat: 2
+    });
+
+    this.anims.create({
+      key: 'space-left',
+      frames: this.anims.generateFrameNumbers('player', { start: 13, end: 14 }),
+      frameRate: 2,
       repeat: 2
     });
 
@@ -177,9 +184,13 @@ var cena1 = {
     this.updatePlayerLives = updatePlayerLives;
   },
 
+
   update: function () {
     // Função de atualização da cena
     // Aqui você pode adicionar lógica de controle do jogo e interações entre os objetos
+
+    var playerX = this.player.x;
+    var enemyX = this.enemy.x;
 
     var cursors = this.input.keyboard.createCursorKeys();
 
@@ -187,15 +198,37 @@ var cena1 = {
     if (cursors.left.isDown) {
       this.player.setVelocityX(-360);
       this.player.anims.play('left', true);
-    } else if (cursors.right.isDown) {
+
+      if (cursors.space.isDown && cursors.left.isDown) {
+        this.player.setVelocityX(-100);
+        this.player.anims.play('space-left', true);
+  
+        if (playerX <= enemyX + 200 && playerX >= enemyX - 200) {
+          enemyLives--;
+          if (enemyLives <= 0) {
+            this.enemy.disableBody(true, true);
+          }
+        }
+      }
+    }
+    else if (cursors.right.isDown) {
       this.player.setVelocityX(360);
       this.player.anims.play('right', true);
-    } 
-      else if(cursors.space.isDown){
-      this.player.setVelocityX(0);
-      this.player.anims.play('space', true);
+
+      if ((cursors.space.isDown) && (cursors.right.isDown)) {
+        this.player.setVelocityX(100);
+        this.player.anims.play('space-right', true);
+  
+        if (playerX >= enemyX - 200 && playerX <= enemyX + 200) {
+          enemyLives--;
+          if (enemyLives <= 0) {
+            this.enemy.disableBody(true, true);
+          }
+        }
+      }
     }
-      else {
+
+    else {
       this.player.setVelocityX(0);
       this.player.anims.play('turn');
     }
@@ -213,16 +246,28 @@ var cena1 = {
       } else {
         this.enemy.setVelocityX(80);
         this.enemy.anims.play('right1', true);
-      }      
-    } 
-    else if (distance <200){
+      }
+    }
+    else if (distance < 200) {
       if (this.enemy.x > this.player.x) {
         this.enemy.setVelocityX(-80);
         this.enemy.anims.play('space1-left', true);
+
+        if (playerX >= enemyX - 20 && enemyLives > 0) {
+          var temp = this.player.x;
+          this.player.setX(temp - 190);
+
+        }
       } else {
         this.enemy.setVelocityX(80);
         this.enemy.anims.play('space1-right', true);
-      } 
+
+        if (playerX <= enemyX + 20 && enemyLives > 0) {
+          var temp = this.player.x;
+          this.player.setX(temp + 190);
+
+        }
+      }
     }
     else {
       this.enemy.setVelocityX(0);
