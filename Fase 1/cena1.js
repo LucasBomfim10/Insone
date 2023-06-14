@@ -275,11 +275,11 @@ var cena1 = {
     }
 
     // Verificação se o jogador chegou ao final da fase
-    if (this.player.x >= 4500) {
+    /*if (this.player.x >= 4500) {
       music.stop();
       this.scene.stop('cena1');
       game.scene.start('boss1'); // Inicia a cena do chefe
-    }
+    }*/
   }
 };
 
