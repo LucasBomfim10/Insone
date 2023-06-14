@@ -34,6 +34,7 @@ var cena1 = {
         playerLives--;
         updatePlayerLives();
         playerCanHitEnemy = false;
+        
 
         if (playerLives <= 0) {
           this.physics.pause();
@@ -70,6 +71,8 @@ var cena1 = {
     // Criando jogador e inimigo
     this.player = this.physics.add.sprite(100, this.ground.getChildren()[0].y - 500, 'player', 'player');
     this.enemy = this.physics.add.sprite(700, 304, 'enemy');
+    this.enemy2 = this.physics.add.sprite(1000, 304, 'enemy');
+    this.enemy3 = this.physics.add.sprite(1300, 304, 'enemy');
 
     // Configurando offset para o jogador
     this.player.setSize(80, 200); // Define o tamanho da área de colisão
@@ -79,10 +82,21 @@ var cena1 = {
     this.enemy.setSize(100, 200);
     this.enemy.setOffset(70, 10);
 
+    this.enemy2.setSize(100, 200);
+    this.enemy2.setOffset(70, 10);
+
+    this.enemy3.setSize(100, 200);
+    this.enemy3.setOffset(70, 10);
+
     // Configurando colisões
     this.physics.add.collider(this.player, this.ground);
     this.physics.add.collider(this.enemy, this.ground);
+    this.physics.add.collider(this.enemy2, this.ground);
+    this.physics.add.collider(this.enemy3, this.ground);
     playerCollider = this.physics.add.collider(this.player, this.enemy, hitEnemy, null, this);
+    this.physics.add.collider(this.player, this.enemy2, hitEnemy, null, this);
+    this.physics.add.collider(this.player, this.enemy3, hitEnemy, null, this);
+    
     this.player.setCollideWorldBounds(true);
     this.enemy.setCollideWorldBounds(true);
 
@@ -191,6 +205,8 @@ var cena1 = {
 
     var playerX = this.player.x;
     var enemyX = this.enemy.x;
+    var enemy2X = this.enemy2.x;
+    var enemy3X = this.enemy3.x;
 
     var cursors = this.input.keyboard.createCursorKeys();
 
@@ -204,9 +220,21 @@ var cena1 = {
         this.player.anims.play('space-left', true);
   
         if (playerX <= enemyX + 200 && playerX >= enemyX - 200) {
-          enemyLives--;
-          if (enemyLives <= 0) {
+          enemyLives[0]--;
+          if (enemyLives[0] <= 0) {
             this.enemy.disableBody(true, true);
+          }
+        }
+        if (playerX <= enemy2X + 200 && playerX >= enemy2X - 200) {
+          enemyLives[1]--;
+          if (enemyLives[1] <= 0) {
+            this.enemy2.disableBody(true, true);
+          }
+        }
+        if (playerX <= enemy3X + 200 && playerX >= enemy3X - 200) {
+          enemyLives[2]--;
+          if (enemyLives[2] <= 0) {
+            this.enemy3.disableBody(true, true);
           }
         }
       }
@@ -220,9 +248,21 @@ var cena1 = {
         this.player.anims.play('space-right', true);
   
         if (playerX >= enemyX - 200 && playerX <= enemyX + 200) {
-          enemyLives--;
-          if (enemyLives <= 0) {
+          enemyLives[0]--;
+          if (enemyLives[0] <= 0) {
             this.enemy.disableBody(true, true);
+          }
+        }
+        if (playerX >= enemy2X - 200 && playerX <= enemy2X + 200) {
+          enemyLives[1]--;
+          if (enemyLives[1] <= 0) {
+            this.enemy2.disableBody(true, true);
+          }
+        }
+        if (playerX >= enemy3X - 200 && playerX <= enemy3X + 200) {
+          enemyLives[2]--;
+          if (enemyLives[2] <= 0) {
+            this.enemy3.disableBody(true, true);
           }
         }
       }
@@ -253,7 +293,7 @@ var cena1 = {
         this.enemy.setVelocityX(-80);
         this.enemy.anims.play('space1-left', true);
 
-        if (playerX >= enemyX - 20 && enemyLives > 0) {
+        if (playerX >= enemyX - 20 && enemyLives[0] > 0) {
           var temp = this.player.x;
           this.player.setX(temp - 190);
 
@@ -262,7 +302,7 @@ var cena1 = {
         this.enemy.setVelocityX(80);
         this.enemy.anims.play('space1-right', true);
 
-        if (playerX <= enemyX + 20 && enemyLives > 0) {
+        if (playerX <= enemyX + 20 && enemyLives[0] > 0) {
           var temp = this.player.x;
           this.player.setX(temp + 190);
 
@@ -274,6 +314,79 @@ var cena1 = {
       this.enemy.anims.play('turn1', true);
     }
 
+    // Movimentação do inimigo 2 em direção ao jogador
+    var distance2 = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.enemy2.x, this.enemy2.y);
+    if (distance2 <= 400 && distance2 >= 200) {
+      if (this.enemy2.x > this.player.x) {
+        this.enemy2.setVelocityX(-80);
+        this.enemy2.anims.play('left1', true);
+      } else {
+        this.enemy2.setVelocityX(80);
+        this.enemy2.anims.play('right1', true);
+      }
+    }
+    else if (distance2 < 200) {
+      if (this.enemy2.x > this.player.x) {
+        this.enemy2.setVelocityX(-80);
+        this.enemy2.anims.play('space1-left', true);
+
+        if (playerX >= enemy2X - 20 && enemyLives[1] > 0) {
+          var temp = this.player.x;
+          this.player.setX(temp - 190);
+
+        }
+      } else {
+        this.enemy2.setVelocityX(80);
+        this.enemy2.anims.play('space1-right', true);
+
+        if (playerX <= enemy2X + 20 && enemyLives[1] > 0) {
+          var temp = this.player.x;
+          this.player.setX(temp + 190);
+
+        }
+      }
+    }
+    else {
+      this.enemy2.setVelocityX(0);
+      this.enemy2.anims.play('turn1', true);
+    }
+
+    // Movimentação do inimigo 3 em direção ao jogador
+    var distance3 = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.enemy3.x, this.enemy3.y);
+    if (distance3 <= 400 && distance3 >= 200) {
+      if (this.enemy3.x > this.player.x) {
+        this.enemy3.setVelocityX(-80);
+        this.enemy3.anims.play('left1', true);
+      } else {
+        this.enemy3.setVelocityX(80);
+        this.enemy3.anims.play('right1', true);
+      }
+    }
+    else if (distance3 < 200) {
+      if (this.enemy3.x > this.player.x) {
+        this.enemy3.setVelocityX(-80);
+        this.enemy3.anims.play('space1-left', true);
+
+        if (playerX >= enemy3X - 20 && enemyLives[2] > 0) {
+          var temp = this.player.x;
+          this.player.setX(temp - 190);
+
+        }
+      } else {
+        this.enemy3.setVelocityX(80);
+        this.enemy3.anims.play('space1-right', true);
+
+        if (playerX <= enemy3X + 20 && enemyLives[2] > 0) {
+          var temp = this.player.x;
+          this.player.setX(temp + 190);
+
+        }
+      }
+    }
+    else {
+      this.enemy3.setVelocityX(0);
+      this.enemy3.anims.play('turn1', true);
+    }
     // Verificação se o jogador chegou ao final da fase
     /*if (this.player.x >= 4500) {
       music.stop();
