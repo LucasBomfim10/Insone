@@ -5,8 +5,8 @@ var cena1 = {
     // Carregando assets específicos para a cena
     this.load.image('map', 'assets/cenario/cenario1.png');
     this.load.image('ground', 'assets/cenario/grounddefault.png');
-    this.load.spritesheet('enemy', 'assets/Personagem/inimigocerto.png', {
-      frameWidth: 240,
+    this.load.spritesheet('enemy', 'assets/Personagem/inimigo-com-ataque.png', {
+      frameWidth: 260,
       frameHeight: 223
     });
 
@@ -130,8 +130,15 @@ var cena1 = {
     // Criação das animações do inimigo
     this.anims.create({
       key: 'left1',
-      frames: this.anims.generateFrameNumbers('enemy', { start: 4, end: 6 }),
+      frames: this.anims.generateFrameNumbers('enemy', { start: 4, end: 7 }),
       //frames: [{ key: 'enemy', frame: 0 }],
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'space1-left',
+      frames: this.anims.generateFrameNumbers('enemy', { start: 12, end: 15 }),
       frameRate: 10,
       repeat: -1
     });
@@ -146,6 +153,13 @@ var cena1 = {
       key: 'right1',
       frames: this.anims.generateFrameNumbers('enemy', { start: 0, end: 3 }),
       //frames: [{ key: 'enemy', frame: 2 }],
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'space1-right',
+      frames: this.anims.generateFrameNumbers('enemy', { start: 8, end: 11 }),
       frameRate: 10,
       repeat: -1
     });
@@ -192,15 +206,25 @@ var cena1 = {
 
     // Movimentação do inimigo em direção ao jogador
     var distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.enemy.x, this.enemy.y);
-    if (distance < 200) {
+    if (distance <= 400 && distance >= 200) {
       if (this.enemy.x > this.player.x) {
         this.enemy.setVelocityX(-80);
         this.enemy.anims.play('left1', true);
       } else {
         this.enemy.setVelocityX(80);
         this.enemy.anims.play('right1', true);
-      }
-    } else {
+      }      
+    } 
+    else if (distance <200){
+      if (this.enemy.x > this.player.x) {
+        this.enemy.setVelocityX(-80);
+        this.enemy.anims.play('space1-left', true);
+      } else {
+        this.enemy.setVelocityX(80);
+        this.enemy.anims.play('space1-right', true);
+      } 
+    }
+    else {
       this.enemy.setVelocityX(0);
       this.enemy.anims.play('turn1', true);
     }
