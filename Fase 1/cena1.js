@@ -9,9 +9,13 @@ var cena1 = {
       frameWidth: 260,
       frameHeight: 223
     });
-
+    // Carrega os dados salvos do servidor
+    
+    loadSavedData();
     this.load.audio('music', 'assets/Pixel Music Pack/mp3/Pixel 3.mp3');
   },
+
+  
 
   create: function () {
     // Função de criação da cena
@@ -197,6 +201,7 @@ var cena1 = {
     // Atribuição da função de atualização das vidas do jogador à cena
     this.updatePlayerLives = updatePlayerLives;
   },
+  
 
 
   update: function () {
@@ -209,6 +214,40 @@ var cena1 = {
     var enemy3X = this.enemy3.x;
 
     var cursors = this.input.keyboard.createCursorKeys();
+
+    if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S).isDown) {
+      // Dados do jogo que serão enviados para o servidor
+      const gameData = {
+        playerLives: playerLives,
+        enemyLives: enemyLives
+        // Adicione outras propriedades relevantes do jogo aqui
+      };
+  
+      // Enviando os dados para o servidor
+      fetch('http://localhost:5500/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameData),
+      })
+        .then(response => {
+          if (response.ok) {
+            console.log('Save successful');
+          } else {
+            console.log('Save failed');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+    
+    
+
+
+
+
 
     // Controle do jogador
     if (cursors.left.isDown) {

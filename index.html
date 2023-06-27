@@ -48,6 +48,7 @@
                 update: update
             }
         };
+        
 
         function preload() {
             //Preload global
@@ -56,15 +57,31 @@
                 frameHeight: 200
             });
             this.load.image('heart', 'assets/Menu/heart.png');
+            
         }
         function create() {
             //Create Global
             
         }
+        // Função de carga de dados salvos
+            function loadSavedData() {
+            fetch('http://localhost:5500/load')
+                .then(response => response.json())
+                .then(data => {
+                console.log('Dados salvos:', data);
+                // Atualize as vidas do jogador e inimigos com os dados recebidos
+                cena1.playerLives = data.playerLives;
+                cena1.enemyLives = data.enemyLives;
+                })
+                .catch(error => {
+                console.error('Erro ao carregar os dados salvos:', error);
+                // Trate o erro de acordo com a sua lógica
+                });
+            }
         function update() {
             //Update Global
         }
-
+        
 
         // Criando o jogo
         var game = new Phaser.Game(config);
