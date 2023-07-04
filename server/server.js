@@ -6,20 +6,28 @@ const port = 5500; // Porta em que o servidor será executado
 // Middleware para habilitar o CORS
 app.use(cors());
 
+let playerLives = 8;
+let enemyLives = [10, 10, 10, 10, 10, 10];
+
+// Configuração para receber dados JSON
+app.use(express.json());
+
 // Endpoint para a operação de save
 app.post('/save', (req, res) => {
-  // Aqui você pode processar os dados recebidos do jogo e armazená-los
-  // em algum formato, como JSON ou em um banco de dados
-  // Você pode enviar uma resposta de sucesso ou erro de volta para o jogo
+  const { playerLives: newPlayerLives } = req.body;
+  //const { enemyLives: newEnemyLives } = req.body;
+  playerLives = newPlayerLives;
+  //enemyLives = newEnemyLives;
   res.send('Save successful');
 });
 
-// Endpoint para a operação de load
+// Rota para enviar a quantidade de vida atual do jogador
 app.get('/load', (req, res) => {
-  // Aqui você pode buscar os dados salvos e enviá-los de volta para o jogo
-  // em um formato adequado, como JSON
-  // Você pode enviar os dados salvos ou uma resposta de erro de volta para o jogo
-  res.json({ playerLives: 12, enemyLives: [10, 10, 10] });
+  const data = {
+    playerLives,
+    //enemyLives
+  };
+  res.json(data);
 });
 
 // Inicie o servidor
