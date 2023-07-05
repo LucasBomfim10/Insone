@@ -20,7 +20,7 @@ var cena1 = {
   create: function () {
     // Função de criação da cena
     // Aqui você pode adicionar lógica de inicialização e criação de objetos
-
+    
     // Função para atualizar as vidas do jogador na tela
     function updatePlayerLives() {
       heartGroup.children.each(function (heart, index) {
@@ -242,11 +242,13 @@ var cena1 = {
 
     var cursors = this.input.keyboard.createCursorKeys();
 
+    
+
+
     if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S).isDown) {
       // Dados do jogo que serão enviados para o servidor
       const gameData = {
-        playerLives: playerLives,
-        enemyLives: enemyLives,
+        saveCena : saveCena,
         // Adicione outras propriedades relevantes do jogo aqui
       };
 
@@ -277,13 +279,13 @@ var cena1 = {
         .then(data => {
           console.log('Dados salvos:', data);
           // Atualize as vidas do jogador e inimigos com os dados recebidos
-          playerLives = data.playerLives;
-          enemyLives[0] = data.enemyLives[0];
-          enemyLives[1] = data.enemyLives[1];
-          enemyLives[2] = data.enemyLives[2];
-          enemyLives[3] = data.enemyLives[3];
-          enemyLives[4] = data.enemyLives[4];
-          enemyLives[5] = data.enemyLives[5];
+          
+          saveCena = data.saveCena
+          
+
+          
+          
+
           
         })
         .catch(error => {
@@ -292,17 +294,7 @@ var cena1 = {
         });
     }
 
-    //Botao carregar
-    if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L).isDown) {
-      loadSavedData();
-      heartGroup.children.each(function (heart, index) {
-        if (index < playerLives) {
-          heart.visible = true;
-        } else {
-          heart.visible = false;
-        }
-      });
-    }
+    
 
 
 
@@ -321,7 +313,9 @@ var cena1 = {
         if (playerX <= enemyX + 200 && playerX >= enemyX - 200) {
           enemyLives[0]--;
           if (enemyLives[0] <= 0) {
+            console.log(enemyLives[0]);
             this.enemy.disableBody(true, true);
+            
           }
         }
         if (playerX <= enemy2X + 200 && playerX >= enemy2X - 200) {
@@ -637,6 +631,64 @@ var cena1 = {
       music.stop();
       this.scene.stop('cena1');
       game.scene.start('cena2'); // Inicia a cena do chefe
+    }
+
+
+    if(enemyLives[0]<=0){
+      this.enemy.disableBody(true, true);
+      
+    }
+    else{
+      this.enemy.setActive(true);
+      this.enemy.setVisible(true);
+    }
+    if(enemyLives[1]<=0){
+      this.enemy2.disableBody(true, true);
+    }
+    else{
+      this.enemy2.setActive(true);
+      this.enemy2.setVisible(true);
+    }
+    if(enemyLives[2]<=0){
+      this.enemy3.disableBody(true, true);
+    }
+    else{
+      this.enemy3.setActive(true);
+      this.enemy3.setVisible(true);
+    }
+    if(enemyLives[3]<=0){
+      this.enemy4.disableBody(true, true);
+    }
+    else{
+      this.enemy4.setActive(true);
+      this.enemy4.setVisible(true);
+    }
+    if(enemyLives[4]<=0){
+      this.enemy5.disableBody(true, true);
+    }
+    else{
+      this.enemy5.setActive(true);
+      this.enemy5.setVisible(true);
+    }
+    if(enemyLives[5]<=0){
+      this.enemy6.disableBody(true, true);
+    }
+    else{
+      this.enemy6.setActive(true);
+      this.enemy6.setVisible(true);
+    }
+    //Botao carregar
+    if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L).isDown) {
+      saveCena = 1;
+      loadSavedData();
+      if(saveCena==1){
+        saveCena = 0;
+        music.stop();
+        this.scene.stop('cena1');
+        game.scene.start('cena1'); // Inicia a cena do chefe
+
+      };
+      
     }
   }
 

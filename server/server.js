@@ -14,18 +14,18 @@ app.use(express.json());
 
 // Endpoint para a operação de save
 app.post('/save', (req, res) => {
-  const { playerLives: newPlayerLives } = req.body;
-  //const { enemyLives: newEnemyLives } = req.body;
-  playerLives = newPlayerLives;
-  //enemyLives = newEnemyLives;
+  const { saveCena: newSaveCena } = req.body;
+  
+  saveCena = newSaveCena;
+  
+  console.log(saveCena);
   res.send('Save successful');
 });
 
 // Rota para enviar a quantidade de vida atual do jogador
 app.get('/load', (req, res) => {
   const data = {
-    playerLives,
-    //enemyLives
+    saveCena
   };
   res.json(data);
 });

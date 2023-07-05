@@ -30,7 +30,8 @@
         var music;
         var playerCanHitEnemy = true;
         var playerCollider;
-
+        var saveCena = 0;
+        
         var config = {
             // Configurações do jogo
             type: Phaser.AUTO,
@@ -40,7 +41,7 @@
                 default: 'arcade',
                 arcade: {
                     gravity: { y: 300 },
-                    debug: false
+                    debug: true
                 }
             },
             scene: {
