@@ -630,10 +630,10 @@ var cena1 = {
       this.enemy6.setVelocityX(0);
       this.enemy6.anims.play('turn1', true);
     }
-    if (this.player.x >= 2000) {
+    if (this.player.x >= 4000) {
       music.stop();
       this.scene.stop('cena1');
-      game.scene.start('cena2'); // Inicia a cena do chefe
+      game.scene.start('cena2'); // Inicia a cena 2
     }
 
 
@@ -697,6 +697,7 @@ var cena1 = {
 
     }
 
+      
 
 
 
