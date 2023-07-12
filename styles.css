@@ -1,11 +1,35 @@
-html{
+html {
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    margin: 0px;
-    background-color: antiquewhite;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    background-color: #282c34; /* Azul escuro */
     font-family: Arial, Helvetica, sans-serif;
-}
-h1{
+    color: white;
+  }
+  
+  header {
+    margin-top: 50px;
+  }
+  
+  h1 {
+    font-size: 72px;
     text-align: center;
-}
+    font-family: "NSimSun";
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  
+  /* Estilo para o jogo Phaser */
+  canvas {
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  
