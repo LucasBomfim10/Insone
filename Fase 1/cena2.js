@@ -11,7 +11,7 @@ var cena2 = {
     });
     // Carrega os dados salvos do servidor
 
-    this.load.audio("music", "assets/Pixel Music Pack/mp3/Pixel 3.mp3");
+    this.load.audio("music2", "assets/Pixel Music Pack/mp3/Pixel 10.mp3");
   },
 
   create: function () {
@@ -59,7 +59,7 @@ var cena2 = {
     }
 
     // Carregando música de fundo
-    music = this.sound.add("music");
+    music = this.sound.add("music2");
     music.setVolume(0.3);
     music.setLoop(true);
     music.play();
